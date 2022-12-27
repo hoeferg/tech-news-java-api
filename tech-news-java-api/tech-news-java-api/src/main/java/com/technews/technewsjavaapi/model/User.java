@@ -28,7 +28,9 @@ public class User {
     @oneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comment> comments;
 
+    public User(){
 
+    }
     public Integer getId() {
         return id;
     }
