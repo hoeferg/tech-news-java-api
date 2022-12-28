@@ -8,6 +8,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -32,7 +33,10 @@ public class Post implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column( name = "updated_at")
     private Date updatedAt = new Date();
+    @OneToMany(mappedBy = "postId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comment> comments;
+
+
 
     public Post() {
 
@@ -153,4 +157,4 @@ public class Post implements Serializable {
                 '}';
     }
 }
-}
+
