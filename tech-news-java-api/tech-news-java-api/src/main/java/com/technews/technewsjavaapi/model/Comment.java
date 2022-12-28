@@ -22,11 +22,12 @@ public class Comment implements Serializable {
 
     }
 
-    public Comment(Integer id, String commentText, Integer userId, Integer postId)
+    public Comment(Integer id, String commentText, Integer userId, Integer postId) {
         this.id = id;
         this.commentText = commentText;
         this.userId = userId;
-        this.postId= postId;
+        this.postId = postId;
+    }
     public Integer getId() {
         return id;
     }
