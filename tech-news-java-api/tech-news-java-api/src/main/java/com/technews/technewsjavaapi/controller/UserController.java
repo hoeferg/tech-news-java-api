@@ -1,6 +1,15 @@
 package com.technews.technewsjavaapi.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.technews.technewsjavaapi.model.Post;
+import com.technews.technewsjavaapi.model.User;
+import com.technews.technewsjavaapi.repository.UserRepository;
+import com.technews.technewsjavaapi.repository.VoteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 

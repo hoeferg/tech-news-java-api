@@ -1,18 +1,21 @@
 package com.technews.technewsjavaapi.controller;
 
 import com.technews.technewsjavaapi.model.Post;
+import com.technews.technewsjavaapi.model.User;
+import com.technews.technewsjavaapi.model.Vote;
+import java.util.List;
+import com.technews.technewsjavaapi.repository.PostRepository;
 import com.technews.technewsjavaapi.repository.UserRepository;
 import com.technews.technewsjavaapi.repository.VoteRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 public class PostController {
     @Autowired
-    postRepository repository;
+    PostRepository repository;
 
     @Autowired
     VoteRepository voteRepository;
@@ -23,7 +26,7 @@ public class PostController {
     @GetMapping("/api/posts")
     public List<Post> getAllPost() {
         List<Post> postList = repository.findAll();
-        for (post p: postList) {
+        for (Post p: postList) {
             p.setVoteCount(voteRepository.countVotesByPostId(p.getId()));
         }
         return postList;
@@ -51,15 +54,15 @@ public class PostController {
         return repository.save(tempPost);
     }
 
-    @putMapping("/api/posts/upvote")
-    public String addVote (@RequestBody Vote vote, HttpsServletRequest request) {
+    @PutMapping("/api/posts/upvote")
+    public String addVote (@RequestBody Vote vote, HttpServletRequest request) {
         String returnValue = "";
 
         if(request.getSession(false) != null) {
             Post returnPost = null;
 
             User sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
-            vote.setUserId(sessionUser.getID());
+            vote.setUserId(sessionUser.getId());
             voteRepository.save(vote);
 
             returnPost = repository.getById(vote.getPostId());
