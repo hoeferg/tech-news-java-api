@@ -1,4 +1,4 @@
-package com.technews.technewsjavaapi.controller.;
+package com.technews.technewsjavaapi.controller;
 
 import com.technews.technewsjavaapi.model.Comment;
 import com.technews.technewsjavaapi.repository.CommentRepository;
