@@ -1,11 +1,20 @@
-package com.technews.controller;
+package com.technews.technewsjavaapi.controller;
 
-import com.technews.repository.CommentRepository;
-import com.technews.repository.PostRepository;
-import com.technews.repository.UserRepository;
-import com.technews.repository.VoteRepository;
+import com.technews.technewsjavaapi.model.Comment;
+import com.technews.technewsjavaapi.model.Post;
+import com.technews.technewsjavaapi.model.User;
+import com.technews.technewsjavaapi.model.Vote;
+import com.technews.technewsjavaapi.repository.CommentRepository;
+import com.technews.technewsjavaapi.repository.PostRepository;
+import com.technews.technewsjavaapi.repository.UserRepository;
+import com.technews.technewsjavaapi.repository.VoteRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class TechNewsController {
@@ -90,7 +99,8 @@ public class TechNewsController {
             return "redirect:/dashboard";
 
             @PostMapping("/posts")
-            public String addPostDashboardPage(@ModelAttribute Post post, Model model, HttpServletRequest request) {
+            public String addPostDashboardPage (@ModelAttribute Post @ModelAttribute Post post;
+            post, Model model, HttpServletRequest request){
 
                 if ((post.getTitle().equals(null) || post.getTitle().isEmpty()) || (post.getPostUrl().equals(null) || post.getPostUrl().isEmpty())) {
                     return "redirect:/dashboardEmptyTitleAndLink";
@@ -107,7 +117,8 @@ public class TechNewsController {
                 }
             }
             @PostMapping("/posts/{id}")
-            public String updatePostDashboardPage(@PathVariable int id, @ModelAttribute Post post, Model model, HttpServletRequest request) {
+            public String updatePostDashboardPage ( @PathVariable int id,
+            @ModelAttribute Post Model model, HttpServletRequest request){
 
                 if (request.getSession(false) == null) {
                     model.addAttribute("user", new User());
@@ -121,7 +132,10 @@ public class TechNewsController {
                 }
             }
             @PostMapping("/comments")
-            public String createCommentCommentsPage(@ModelAttribute Comment comment, Model model, HttpServletRequest request) {
+            public String createCommentCommentsPage (@ModelAttribute Comment
+            Comment comment;
+            comment, Model model, HttpServletRequest
+            request){
 
                 if (comment.getCommentText().isEmpty() || comment.getCommentText().equals(null)) {
                     return "redirect:/singlePostEmptyComment/" + comment.getPostId();
@@ -137,7 +151,7 @@ public class TechNewsController {
                 }
             }
             @PostMapping("/comments/edit")
-            public String createCommentEditPage(@ModelAttribute Comment comment, HttpServletRequest request) {
+            public String createCommentEditPage (@ModelAttribute Comment comment, HttpServletRequest request){
 
                 if (comment.getCommentText().equals("") || comment.getCommentText().equals(null)) {
                     return "redirect:/editPostEmptyComment/" + comment.getPostId();
@@ -155,7 +169,9 @@ public class TechNewsController {
 
             }
             @PutMapping("/posts/upvote")
-            public void addVoteCommentsPage(@RequestBody Vote vote, HttpServletRequest request, HttpServletResponse response) {
+            public void addVoteCommentsPage (@RequestBody Vote Vote vote;
+            vote, HttpServletRequest request, HttpServletResponse
+            response){
 
                 if (request.getSession(false) != null) {
                     Post returnPost = null;
