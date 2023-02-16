@@ -1,5 +1,7 @@
 # Tech News Java Api
 
+<img src="tech-news-g956c650a5_1920.jpg" />
+
 ## Table of Contents  
 * [Description](##Description)  
 * [Technologies](##Technologies)  
